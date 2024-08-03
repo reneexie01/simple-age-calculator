@@ -47,13 +47,15 @@ const domManager = (function DomManager() {
         container.innerHTML = '';
     }
 
-    const yearInput = function() {
+    const yearInput = () => {
         const yearSubmit = document.querySelector('.year-submit');
 
         yearSubmit.addEventListener('click', () => {
             const yearCalculateInput = document.querySelector('.year-calculate').value;
             year = yearCalculateInput;
             yearAnnouncer(year);
+            ageCalculator.getYear(peopleManager.people, year);
+            peopleAgeOutput(ageCalculator.calculatedAges);
         })
     }
 
@@ -63,11 +65,12 @@ const domManager = (function DomManager() {
     }
 
     const peopleAgeOutput = (people) => {
+        console.log('People ages to output:', people);
         clearPeopleAgeOutput();
         people.forEach((person) => {
             const container = document.querySelector('.age-library');
             const paragraph = document.createElement('p');
-            paragraph.innerHTML = `Name: ${person.name}, Age: ${person.year}`;
+            paragraph.innerHTML = `Name: ${person.name}, Age: ${person.age}`;
             container.appendChild(paragraph);
         })
     }
