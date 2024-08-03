@@ -18,7 +18,7 @@ const domManager = (function DomManager() {
                 personManager.addPerson(peopleManager.people);
                 peopleLibrary(peopleManager.people);
                 clearPersonInput();
-                removeMissingValuesWarning(); //imperfect - after the first removal it doesn't go away
+                removeMissingValuesWarning();
             }
         });
     }
@@ -41,8 +41,8 @@ const domManager = (function DomManager() {
     }
 
     const clearPersonInput = () => {
-        const nameInputValue = document.querySelector('.name').value;
-        const birthYearInputValue = document.querySelector('.birth-year').value;
+        const nameInputValue = document.querySelector('.name');
+        const birthYearInputValue = document.querySelector('.birth-year');
         nameInputValue.value = '';
         birthYearInputValue. value = '';
     }
@@ -77,6 +77,11 @@ const domManager = (function DomManager() {
         container.innerHTML = '';
     }
 
+    const clearYearInput = () => {
+        const yearCalculateInput = document.querySelector('.year-calculate');
+        yearCalculateInput.value = '';
+    }
+
     const yearInput = () => {
         const yearSubmit = document.querySelector('.year-submit');
 
@@ -88,6 +93,8 @@ const domManager = (function DomManager() {
             year = yearCalculateInput;
             yearAnnouncer(year);
             ageCalculator.getYear(peopleManager.people, year);
+            clearYearInput();
+            removeMissingValuesWarning();
             }
         })
     }
