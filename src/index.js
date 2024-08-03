@@ -11,12 +11,42 @@ const domManager = (function DomManager() {
             const nameInputValue = document.querySelector('.name').value;
             const birthYearInputValue = document.querySelector('.birth-year').value;
 
-            personManager.newPerson(nameInputValue, birthYearInputValue);
-            personManager.addPerson(peopleManager.people);
-            peopleLibrary(peopleManager.people);
+            if (nameInputValue == '' || birthYearInputValue == '') {
+                missingValuesWarning('person-submit-error');
+            } else {
+                personManager.newPerson(nameInputValue, birthYearInputValue);
+                personManager.addPerson(peopleManager.people);
+                peopleLibrary(peopleManager.people);
+                clearPersonInput();
+                removeMissingValuesWarning(); //imperfect - after the first removal it doesn't go away
+            }
         });
     }
     
+    const missingValuesWarning = (selector) => {
+        const container = document.querySelector(`.${selector}`);
+        const paragraph = document.createElement('p');
+        paragraph.classList.add('error');
+        paragraph.innerHTML = `Missing values detected.`
+        container.appendChild(paragraph);
+    }
+
+    const removeMissingValuesWarning = (selector) => {
+        const paragraph = document.querySelector('.error');
+        if (paragraph) {
+            paragraph.remove();    
+        } else {
+            return;
+        }
+    }
+
+    const clearPersonInput = () => {
+        const nameInputValue = document.querySelector('.name').value;
+        const birthYearInputValue = document.querySelector('.birth-year').value;
+        nameInputValue.value = '';
+        birthYearInputValue. value = '';
+    }
+
     const peopleLibrary = (people) => {
         clearPeopleLibrary();
         people.forEach((person) => {
@@ -52,9 +82,13 @@ const domManager = (function DomManager() {
 
         yearSubmit.addEventListener('click', () => {
             const yearCalculateInput = document.querySelector('.year-calculate').value;
+            if (yearCalculateInput == '') {
+                missingValuesWarning('year-submit-error');
+            } else {
             year = yearCalculateInput;
             yearAnnouncer(year);
             ageCalculator.getYear(peopleManager.people, year);
+            }
         })
     }
 
