@@ -55,23 +55,6 @@ const domManager = (function DomManager() {
             year = yearCalculateInput;
             yearAnnouncer(year);
             ageCalculator.getYear(peopleManager.people, year);
-            peopleAgeOutput(ageCalculator.calculatedAges);
-        })
-    }
-
-    const clearPeopleAgeOutput = () => {
-        const container = document.querySelector('.age-library');
-        container.innerHTML = '';
-    }
-
-    const peopleAgeOutput = (people) => {
-        console.log('People ages to output:', people);
-        clearPeopleAgeOutput();
-        people.forEach((person) => {
-            const container = document.querySelector('.age-library');
-            const paragraph = document.createElement('p');
-            paragraph.innerHTML = `Name: ${person.name}, Age: ${person.age}`;
-            container.appendChild(paragraph);
         })
     }
 

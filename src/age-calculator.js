@@ -5,7 +5,7 @@ const ageCalculator = (function AgeCalculator() {
     let calculatedAges = [];
 
         const getYear = function(people, year) {
-            //calculatedAges = [];
+            clearCalculatedAges();
             people.forEach((person) => {
                 let age;
                 let name;
@@ -15,7 +15,7 @@ const ageCalculator = (function AgeCalculator() {
                 newPerson = ageCalculatedPerson(name, age);
                 calculatedAges.push(newPerson)
             })
-            console.log('Calculated Ages:', calculatedAges); // Add this line
+            peopleAgeOutput(calculatedAges);
             return calculatedAges;
         }
 
@@ -26,7 +26,26 @@ const ageCalculator = (function AgeCalculator() {
             }
             return person;
         }
+
+        const clearCalculatedAges = () => {
+            calculatedAges = [];
+        }
+
+        const clearPeopleAgeOutput = () => {
+            const container = document.querySelector('.age-library');
+            container.innerHTML = '';
+        }
+
+        const peopleAgeOutput = (people) => {
+            clearPeopleAgeOutput();
+            people.forEach((person) => {
+                const container = document.querySelector('.age-library');
+                const paragraph = document.createElement('p');
+                paragraph.innerHTML = `Name: ${person.name}, Age: ${person.age}`;
+                container.appendChild(paragraph);
+            })
+        }
     
-        return { getYear, calculatedAges };
+        return { getYear, calculatedAges, clearCalculatedAges };
     
     })();
