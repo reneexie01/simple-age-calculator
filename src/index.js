@@ -19,6 +19,7 @@ const domManager = (function DomManager() {
                 peopleLibrary(peopleManager.people);
                 clearPersonInput();
                 removeMissingValuesWarning();
+                console.log(peopleManager.people)
             }
         });
     }
@@ -49,11 +50,30 @@ const domManager = (function DomManager() {
 
     const peopleLibrary = (people) => {
         clearPeopleLibrary();
-        people.forEach((person) => {
+        people.forEach((person, index) => {
             const container = document.querySelector('.people-library');
             const paragraph = document.createElement('p');
+            const button = document.createElement('button');
+            button.innerHTML = 'Delete';
+            button.classList.add('delete');
+            button.setAttribute('id',`${index}`);
             paragraph.innerHTML = `Name: ${person.name}, Birth Year: ${person.year}`;
+            paragraph.appendChild(button);
             container.appendChild(paragraph);
+        })
+        deletePerson();
+    }
+
+    const deletePerson = () => {
+        const peopleLibraryDOM = document.querySelector('.people-library');
+
+        peopleLibraryDOM.addEventListener('click', (e) => {
+            if (e.target.classList.contains('delete')) {
+                const index = e.target.getAttribute('id');
+                personManager.removePerson(index, peopleManager.people);
+                console.log(peopleManager.people);
+                peopleLibrary(peopleManager.people);
+            }
         })
     }
 
