@@ -70,7 +70,7 @@ const domManager = (function DomManager() {
         peopleLibraryDOM.addEventListener('click', (e) => {
             if (e.target.classList.contains('delete')) {
                 const index = e.target.getAttribute('id');
-                personManager.removePerson(index, peopleManager.people);
+                personManager.removePerson(index, peopleManager.people); // removing too many people upon the second click
                 console.log(peopleManager.people);
                 peopleLibrary(peopleManager.people);
             }
@@ -114,14 +114,34 @@ const domManager = (function DomManager() {
             yearAnnouncer(year);
             ageCalculator.getYear(peopleManager.people, year);
             clearYearInput();
-            removeMissingValuesWarning();
+            removeMissingValuesWarning(); //doesnt work if there are multiple missing values
             }
         })
     }
 
-    return { personInput, yearInput };
+    const clearAll = () => {
+        const clearButton = document.querySelector('.clear-all');
+
+        clearButton.addEventListener('click', () => {
+            clearDOM();
+        })
+    }
+
+    const clearDOM = () => {
+        peopleManager.clearPeople;
+        personManager.clearPerson;
+        clearPersonInput();
+        clearPeopleLibrary();
+        removeMissingValuesWarning();
+        clearYearInput();
+        clearYearAnnouncer();
+        ageCalculator.clearPeopleAgeOutput(); // this doesn't work
+    }
+
+    return { personInput, yearInput, clearAll };
 
 })();
 
 domManager.personInput();
 domManager.yearInput();
+domManager.clearAll();
