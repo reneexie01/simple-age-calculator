@@ -127,14 +127,16 @@ const domManager = (function DomManager() {
     }
 
     const clearDOM = () => {
-        peopleManager.clearPeople;
-        personManager.clearPerson;
         clearPersonInput();
         clearPeopleLibrary();
-        removeMissingValuesWarning();
+        removeMissingValuesWarning('person-submit-error');
+        removeMissingValuesWarning('year-submit-error');
         clearYearInput();
         clearYearAnnouncer();
-        ageCalculator.clearPeopleAgeOutput(); // this doesn't work
+        peopleManager.clearPeople();
+        console.log(peopleManager.people);
+        personManager.clearPerson();
+        ageCalculator.clearPeopleAgeOutput();
     }
 
     return { personInput, yearInput, clearAll };

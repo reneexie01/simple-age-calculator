@@ -46,6 +46,6 @@ const ageCalculator = (function AgeCalculator() {
             })
         }
     
-        return { getYear, calculatedAges, clearCalculatedAges };
+        return { getYear, calculatedAges, clearCalculatedAges, clearPeopleAgeOutput };
     
     })();
