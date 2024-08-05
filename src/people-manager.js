@@ -2,12 +2,11 @@ export { peopleManager }
 
 const peopleManager = (function PeopleManager() {
     
-    let people = [
-        {name: 'Renee', year: 1994},
-        {name: 'Leya', year: 1995},
-        {name: 'Logan', year: 2018},
-        {name: 'Tina', year: 2019},
-    ];
+    let people = [];
+
+    const generateUniqueId = () => {
+        return '_' + Math.random().toString(36).substr(2,9);
+    }
 
     const renderPeople = () => console.log(people);
 
@@ -15,6 +14,6 @@ const peopleManager = (function PeopleManager() {
         people = [];
     }
 
-    return { people, renderPeople, clearPeople };
+    return { people, renderPeople, clearPeople, generateUniqueId };
 
 })();

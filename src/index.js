@@ -50,13 +50,13 @@ const domManager = (function DomManager() {
 
     const peopleLibrary = (people) => {
         clearPeopleLibrary();
-        people.forEach((person, index) => {
+        people.forEach((person) => {
             const container = document.querySelector('.people-library');
             const paragraph = document.createElement('p');
             const button = document.createElement('button');
             button.innerHTML = 'Delete';
             button.classList.add('delete');
-            button.setAttribute('id',`${index}`);
+            button.setAttribute('unique-id',`${person.id}`);
             paragraph.innerHTML = `Name: ${person.name}, Birth Year: ${person.year}`;
             paragraph.appendChild(button);
             container.appendChild(paragraph);
@@ -69,9 +69,8 @@ const domManager = (function DomManager() {
 
         peopleLibraryDOM.addEventListener('click', (e) => {
             if (e.target.classList.contains('delete')) {
-                const index = e.target.getAttribute('id');
-                personManager.removePerson(index, peopleManager.people); // removing too many people upon the second click
-                console.log(peopleManager.people);
+                const id = e.target.getAttribute('unique-id');
+                personManager.removePerson(id, peopleManager.people);
                 peopleLibrary(peopleManager.people);
             }
         })
