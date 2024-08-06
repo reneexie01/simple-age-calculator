@@ -16,10 +16,10 @@ const domManager = (function DomManager() {
             } else {
                 personManager.newPerson(nameInputValue, birthYearInputValue);
                 personManager.addPerson(peopleManager.people);
+                // localStorage.setItem('people', JSON.stringify(peopleManager.people)); // adding new people to local storage
                 peopleLibrary(peopleManager.people);
                 clearPersonInput();
                 removeMissingValuesWarning();
-                console.log(peopleManager.people)
             }
         });
     }
@@ -32,7 +32,7 @@ const domManager = (function DomManager() {
         container.appendChild(paragraph);
     }
 
-    const removeMissingValuesWarning = (selector) => {
+    const removeMissingValuesWarning = () => {
         const paragraph = document.querySelector('.error');
         if (paragraph) {
             paragraph.remove();    
@@ -113,7 +113,7 @@ const domManager = (function DomManager() {
             yearAnnouncer(year);
             ageCalculator.getYear(peopleManager.people, year);
             clearYearInput();
-            removeMissingValuesWarning(); //doesnt work if there are multiple missing values
+            removeMissingValuesWarning();
             }
         })
     }
@@ -129,20 +129,24 @@ const domManager = (function DomManager() {
     const clearDOM = () => {
         clearPersonInput();
         clearPeopleLibrary();
-        removeMissingValuesWarning('person-submit-error');
-        removeMissingValuesWarning('year-submit-error');
+        removeMissingValuesWarning();
+        removeMissingValuesWarning();
         clearYearInput();
         clearYearAnnouncer();
         peopleManager.clearPeople();
-        console.log(peopleManager.people);
         personManager.clearPerson();
         ageCalculator.clearPeopleAgeOutput();
     }
 
-    return { personInput, yearInput, clearAll };
+    const renderExistingPeople = () => {
+        peopleLibrary(peopleManager.people);
+    }
+
+    return { personInput, yearInput, clearAll, renderExistingPeople };
 
 })();
 
 domManager.personInput();
 domManager.yearInput();
 domManager.clearAll();
+domManager.renderExistingPeople();
