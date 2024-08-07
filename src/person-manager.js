@@ -6,8 +6,6 @@ const personManager = (function PersonManager() {
 
     let person = {};
 
-    const renderPerson = () => console.log(person);
-
     const newPerson = (name, year) => {
         person = {
             'id': peopleManager.generateUniqueId(),
@@ -32,6 +30,6 @@ const personManager = (function PersonManager() {
         }
     }
 
-    return { renderPerson, newPerson, clearPerson, addPerson, removePerson };
+    return { newPerson, clearPerson, addPerson, removePerson };
 
 })();

@@ -85,15 +85,13 @@ const domManager = (function DomManager() {
 
     const yearAnnouncer = (year) => {
         clearYearAnnouncer();
-        const container = document.querySelector('.year-announcer');
-        const paragraph = document.createElement('p');
-        paragraph.innerHTML = `<h2>Year to calculate: ${year}</h2> `;
-        container.appendChild(paragraph);
+        const yearToCalculate = document.querySelector('.year-to-calculate');
+        yearToCalculate.innerHTML = `Year to calculate: ${year}`;
     }
 
     const clearYearAnnouncer = () => {
-        const container = document.querySelector('.year-announcer');
-        container.innerHTML = '';
+        const yearToCalculate = document.querySelector('.year-to-calculate');
+        yearToCalculate.innerHTML = `Year to calculate:`;
     }
 
     const clearYearInput = () => {

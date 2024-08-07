@@ -15,12 +15,10 @@ const peopleManager = (function PeopleManager() {
         */
     ];
 
-    const renderPeople = () => console.log(people);
-
     const clearPeople = () => {
         people.length = 0;
     }
 
-    return { people, renderPeople, clearPeople, generateUniqueId };
+    return { people, clearPeople, generateUniqueId };
 
 })();
