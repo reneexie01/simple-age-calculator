@@ -14,16 +14,46 @@ const domManager = (function DomManager() {
             if (nameInputValue == '' || birthYearInputValue == '') {
                 missingValuesWarning('person-submit-error');
             } else {
-                personManager.newPerson(nameInputValue, birthYearInputValue);
-                personManager.addPerson(peopleManager.people);
-                // localStorage.setItem('people', JSON.stringify(peopleManager.people)); // adding new people to local storage
-                peopleLibrary(peopleManager.people);
+                let newPerson = personManager.newPerson(nameInputValue, birthYearInputValue);
+                // personManager.addPerson(peopleManager.people);
+                // peopleLibrary(peopleManager.people);
+                addToLocalStorage(newPerson);
+                peopleManager.clearPeople();
+                loadPeopleFromLocalStorage();
+                renderPeopleLibrary();
                 clearPersonInput();
                 removeMissingValuesWarning();
             }
         });
     }
     
+    const addToLocalStorage = (newPerson) => {
+        let people = JSON.parse(localStorage.getItem('people')) || [];
+        people.push(newPerson);
+        localStorage.setItem('people', JSON.stringify(people));
+    }
+
+    const loadPeopleFromLocalStorage = () => {
+        const people = JSON.parse(localStorage.getItem('people')) || [];
+        peopleManager.people = people;
+    }
+
+    const renderPeopleLibrary = () => {
+        clearPeopleLibrary();
+        peopleManager.people.forEach((person) => {
+            const container = document.querySelector('.people-library');
+            const paragraph = document.createElement('p');
+            const button = document.createElement('button');
+            button.innerHTML = 'Delete';
+            button.classList.add('delete');
+            button.setAttribute('unique-id',`${person.id}`);
+            paragraph.innerHTML = `Name: ${person.name}, Birth Year: ${person.year}`;
+            paragraph.appendChild(button);
+            container.appendChild(paragraph);
+        })
+        deletePerson();
+    }
+
     const missingValuesWarning = (selector) => {
         const container = document.querySelector(`.${selector}`);
         const paragraph = document.createElement('p');
@@ -48,30 +78,17 @@ const domManager = (function DomManager() {
         birthYearInputValue. value = '';
     }
 
-    const peopleLibrary = (people) => {
-        clearPeopleLibrary();
-        people.forEach((person) => {
-            const container = document.querySelector('.people-library');
-            const paragraph = document.createElement('p');
-            const button = document.createElement('button');
-            button.innerHTML = 'Delete';
-            button.classList.add('delete');
-            button.setAttribute('unique-id',`${person.id}`);
-            paragraph.innerHTML = `Name: ${person.name}, Birth Year: ${person.year}`;
-            paragraph.appendChild(button);
-            container.appendChild(paragraph);
-        })
-        deletePerson();
-    }
-
     const deletePerson = () => {
         const peopleLibraryDOM = document.querySelector('.people-library');
 
         peopleLibraryDOM.addEventListener('click', (e) => {
             if (e.target.classList.contains('delete')) {
                 const id = e.target.getAttribute('unique-id');
-                personManager.removePerson(id, peopleManager.people);
-                peopleLibrary(peopleManager.people);
+                let people = JSON.parse(localStorage.getItem('people')) || [];
+                people = people.filter((person) => person.id !== id);
+                localStorage.setItem('people', JSON.stringify(people));
+                loadPeopleFromLocalStorage();
+                renderPeopleLibrary();
             }
         })
     }
@@ -137,7 +154,7 @@ const domManager = (function DomManager() {
     }
 
     const renderExistingPeople = () => {
-        peopleLibrary(peopleManager.people);
+        renderPeopleLibrary();
     }
 
     return { personInput, yearInput, clearAll, renderExistingPeople };

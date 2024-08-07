@@ -22,14 +22,14 @@ const personManager = (function PersonManager() {
     const addPerson = (people) => {
         people.push(person)
     }
-
+/*
     const removePerson = (id, people) => {
         const index = people.findIndex(person => person.id === id);
         if (index > -1) {
             people.splice(index, 1);
         }
     }
-
-    return { newPerson, clearPerson, addPerson, removePerson };
+*/
+    return { newPerson, clearPerson, addPerson, /* removePerson */ };
 
 })();
