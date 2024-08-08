@@ -13,5 +13,13 @@ module.exports = {
         filename: 'index.html',
         inject: 'body',
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
 };

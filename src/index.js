@@ -1,6 +1,7 @@
 import { peopleManager } from "./people-manager";
 import { personManager } from "./person-manager";
 import { ageCalculator } from "./age-calculator";
+import "./style.css";
 
 const domManager = (function DomManager() {
 
@@ -151,9 +152,16 @@ const domManager = (function DomManager() {
         peopleManager.clearPeople();
         personManager.clearPerson();
         ageCalculator.clearPeopleAgeOutput();
+        clearLocalStorage();
+    }
+
+    const clearLocalStorage = () => {
+        peopleManager.clearPeople();
+        localStorage.clear();
     }
 
     const renderExistingPeople = () => {
+        loadPeopleFromLocalStorage();
         renderPeopleLibrary();
     }
 
