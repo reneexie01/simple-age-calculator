@@ -1,7 +1,7 @@
 body {
     max-width: 600px;
-    border: 1px solid blue;
     margin: auto;
+    height: 150vh;
 }
 
 .clear-button {
@@ -46,7 +46,12 @@ h2 {
     padding-right: 1rem;
 }
 
-.people-age-output {
-    border: 1px solid blue;
+.people-container, .people-age-output {
+    padding-left: 1rem;
+    padding-bottom: 0.5rem;
 }
 
+.error {
+    color: red;
+    font-size: 0.75rem;
+}

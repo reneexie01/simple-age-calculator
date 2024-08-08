@@ -49,12 +49,12 @@ const domManager = (function DomManager() {
 
             const div1 = document.createElement('div');
             div1.classList.add('name-birthyear');
-            const paragraph = document.createElement('p');
-            paragraph.innerHTML = `
+            const div = document.createElement('div');
+            div.innerHTML = `
             <div class="render-name">Name: ${person.name}</div> 
             <div class="render-birthyear">Birth Year: ${person.year}</div>
             `;
-            div1.appendChild(paragraph);
+            div1.appendChild(div);
             masterDiv.appendChild(div1);
 
             const div2 = document.createElement('div');
@@ -73,17 +73,22 @@ const domManager = (function DomManager() {
     }
 
     const missingValuesWarning = (selector) => {
-        const container = document.querySelector(`.${selector}`);
-        const paragraph = document.createElement('p');
-        paragraph.classList.add('error');
-        paragraph.innerHTML = `Missing values detected.`
-        container.appendChild(paragraph);
+        const div = document.querySelector('.error');
+        if (div) {
+            div.remove();  
+        } else {
+            const container = document.querySelector(`.${selector}`);
+            const div = document.createElement('div');
+            div.classList.add('error');
+            div.innerHTML = `Missing values detected.`
+            container.appendChild(div); // need to prevent stacking of missing values warning when clicked multiple times
+        }
     }
 
     const removeMissingValuesWarning = () => {
-        const paragraph = document.querySelector('.error');
-        if (paragraph) {
-            paragraph.remove();    
+        const div = document.querySelector('.error');
+        if (div) {
+            div.remove();    
         } else {
             return;
         }
