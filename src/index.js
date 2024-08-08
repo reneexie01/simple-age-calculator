@@ -43,14 +43,31 @@ const domManager = (function DomManager() {
         clearPeopleLibrary();
         peopleManager.people.forEach((person) => {
             const container = document.querySelector('.people-library');
+            
+            const masterDiv = document.createElement('div');
+            masterDiv.classList.add('people-container');
+
+            const div1 = document.createElement('div');
+            div1.classList.add('name-birthyear');
             const paragraph = document.createElement('p');
+            paragraph.innerHTML = `
+            <div class="render-name">Name: ${person.name}</div> 
+            <div class="render-birthyear">Birth Year: ${person.year}</div>
+            `;
+            div1.appendChild(paragraph);
+            masterDiv.appendChild(div1);
+
+            const div2 = document.createElement('div');
+            div2.classList.add('delete-button');
             const button = document.createElement('button');
             button.innerHTML = 'Delete';
             button.classList.add('delete');
             button.setAttribute('unique-id',`${person.id}`);
-            paragraph.innerHTML = `Name: ${person.name}, Birth Year: ${person.year}`;
-            paragraph.appendChild(button);
-            container.appendChild(paragraph);
+            div2.appendChild(button);
+            masterDiv.appendChild(div2)
+
+            container.appendChild(masterDiv);
+
         })
         deletePerson();
     }

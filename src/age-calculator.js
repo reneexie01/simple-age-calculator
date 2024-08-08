@@ -40,9 +40,25 @@ const ageCalculator = (function AgeCalculator() {
             clearPeopleAgeOutput();
             people.forEach((person) => {
                 const container = document.querySelector('.age-library');
-                const paragraph = document.createElement('p');
-                paragraph.innerHTML = `Name: ${person.name}, Age: ${person.age}`;
-                container.appendChild(paragraph);
+
+                const masterDiv = document.createElement('div');
+                masterDiv.classList.add('people-age-output');
+                
+                const div1 = document.createElement('div');
+                div1.classList.add('name');
+                const paragraph1 = document.createElement('p');
+                paragraph1.innerHTML = `Name: ${person.name}`
+                div1.appendChild(paragraph1);
+                masterDiv.appendChild(div1);
+
+                const div2 = document.createElement('div');
+                div2.classList.add('age');
+                const paragraph2 = document.createElement('p');
+                paragraph2.innerHTML = `Age: ${person.age}`;
+                div2.appendChild(paragraph2);
+                masterDiv.appendChild(div2);
+
+                container.appendChild(masterDiv);
             })
         }
     

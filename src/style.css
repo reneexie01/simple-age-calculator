@@ -1,7 +1,12 @@
 body {
     max-width: 600px;
     border: 1px solid blue;
-    margin: auto
+    margin: auto;
+}
+
+.clear-button {
+    text-align: center;
+    padding-top: 1rem;
 }
 
 h1 {
@@ -11,3 +16,37 @@ h1 {
 h2 {
     font-size: 1.5rem;
 }
+
+.label {
+    display: inline-block;
+    width: 120px;
+}
+
+.person-inputs, .year-inputs, .people-container {
+    padding-left: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+
+.year-to-calculate {
+    padding-left: 1rem;
+}
+
+.inputs-name {
+    margin-bottom: 5px;
+}
+
+.person-submit, .year-submit, .clear-all, .delete {
+    padding: 5px 15px;
+}
+
+.submit-button, .delete-button {
+    text-align: right;
+    padding-right: 1rem;
+}
+
+.people-age-output {
+    border: 1px solid blue;
+}
+

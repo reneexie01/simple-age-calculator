@@ -7,25 +7,39 @@
 </head>
 <body>
     <div>
-        <button class="clear-all">Clear All</button>
+        <div class="clear-button">
+            <button class="clear-all">Clear All</button>
+        </div>
         <h1>Add a person:</h1>
-        <div>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" class="name">
+        <div class="person-inputs">
+            <div class="inputs">
+                <div class="inputs-name">
+                    <label for="name"><span class="label">Name:</span></label>
+                    <input type="text" id="name" name="name" class="name">
+                </div>
+                <div class="inputs-birthyear">
+                    <label for="birth-year"><span class="label">Birth Year:</span></label>
+                    <input type="text" id="birth-year" name="birth-year" class="birth-year">
+                </div>
+            </div>
+            <div class="submit-button">
+                <button type="submit" class="person-submit">Submit</button>
+            </div>
+            <div class="person-submit-error"></div>
         </div>
-        <div>
-            <label for="birth-year">Birth Year:</label>
-            <input type="text" id="birth-year" name="birth-year" class="birth-year">
-        </div>
-        <button type="submit" class="person-submit">Submit</button>
-        <div class="person-submit-error"></div>
     </div>
     <div>
         <h1>Add a year:</h1>
-        <label for="year-calculate">Year to calculate:</label>
-        <input type="text" id="year-calculate" name="year-calculate" class="year-calculate">
-        <button type="submit" class="year-submit">Submit</button>
-        <div class="year-submit-error"></div>
+        <div class="year-inputs">
+            <div class="inputs">
+                <label for="year-calculate"><span class="label">Year to calculate:</span></label>
+                <input type="text" id="year-calculate" name="year-calculate" class="year-calculate">
+            </div>
+            <div class="submit-button">
+                <button type="submit" class="year-submit">Submit</button>
+            </div>
+            <div class="year-submit-error"></div>
+        </div>
     </div>
     <h1>People library:</h1>
         <div class="people-library"></div>
