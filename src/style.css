@@ -51,7 +51,7 @@ h2 {
     padding-bottom: 0.5rem;
 }
 
-.error {
+.error-year-submit-error, .error-person-submit-error {
     color: red;
     font-size: 0.75rem;
 }

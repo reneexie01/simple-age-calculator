@@ -23,7 +23,7 @@ const domManager = (function DomManager() {
                 loadPeopleFromLocalStorage();
                 renderPeopleLibrary();
                 clearPersonInput();
-                removeMissingValuesWarning();
+                removeMissingValuesWarning('person-submit-error');
             }
         });
     }
@@ -73,20 +73,20 @@ const domManager = (function DomManager() {
     }
 
     const missingValuesWarning = (selector) => {
-        const div = document.querySelector('.error');
+        const div = document.querySelector(`.error-${selector}`);
         if (div) {
             div.remove();  
         } else {
             const container = document.querySelector(`.${selector}`);
             const div = document.createElement('div');
-            div.classList.add('error');
+            div.classList.add(`error-${selector}`);
             div.innerHTML = `Missing values detected.`
             container.appendChild(div); // need to prevent stacking of missing values warning when clicked multiple times
         }
     }
 
-    const removeMissingValuesWarning = () => {
-        const div = document.querySelector('.error');
+    const removeMissingValuesWarning = (selector) => {
+        const div = document.querySelector(`.error-${selector}`);
         if (div) {
             div.remove();    
         } else {
@@ -151,7 +151,7 @@ const domManager = (function DomManager() {
             yearAnnouncer(year);
             ageCalculator.getYear(peopleManager.people, year);
             clearYearInput();
-            removeMissingValuesWarning();
+            removeMissingValuesWarning('year-submit-error');
             }
         })
     }
@@ -167,8 +167,8 @@ const domManager = (function DomManager() {
     const clearDOM = () => {
         clearPersonInput();
         clearPeopleLibrary();
-        removeMissingValuesWarning();
-        removeMissingValuesWarning();
+        removeMissingValuesWarning('year-submit-error');
+        removeMissingValuesWarning('person-submit-error');
         clearYearInput();
         clearYearAnnouncer();
         peopleManager.clearPeople();
