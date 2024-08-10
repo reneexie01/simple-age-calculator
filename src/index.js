@@ -1,9 +1,15 @@
 import { peopleManager } from "./people-manager";
 import { personManager } from "./person-manager";
 import { ageCalculator } from "./age-calculator";
+import { renderPokemon } from "./sprites";
 import "./style.css";
 
 const domManager = (function DomManager() {
+
+    const renderPokemonSprites = function() {
+        const container = document.querySelector('.pokemon');
+        container.appendChild(renderPokemon());
+    }
 
     const personInput = function() {
         const personSubmit = document.querySelector('.person-submit');
@@ -16,8 +22,6 @@ const domManager = (function DomManager() {
                 missingValuesWarning('person-submit-error');
             } else {
                 let newPerson = personManager.newPerson(nameInputValue, birthYearInputValue);
-                // personManager.addPerson(peopleManager.people);
-                // peopleLibrary(peopleManager.people);
                 addToLocalStorage(newPerson);
                 peopleManager.clearPeople();
                 loadPeopleFromLocalStorage();
@@ -67,7 +71,6 @@ const domManager = (function DomManager() {
             masterDiv.appendChild(div2)
 
             container.appendChild(masterDiv);
-
         })
         deletePerson();
     }
@@ -187,7 +190,7 @@ const domManager = (function DomManager() {
         renderPeopleLibrary();
     }
 
-    return { personInput, yearInput, clearAll, renderExistingPeople };
+    return { personInput, yearInput, clearAll, renderExistingPeople, renderPokemonSprites };
 
 })();
 
@@ -195,3 +198,4 @@ domManager.personInput();
 domManager.yearInput();
 domManager.clearAll();
 domManager.renderExistingPeople();
+domManager.renderPokemonSprites();
