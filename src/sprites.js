@@ -7,9 +7,11 @@ function renderPokemon() {
     element.classList.add('pokemon');
 
     const chikorita = new Image();
+    chikorita.classList.add('chikorita');
     chikorita.src = chikoritaSprite;
 
     const squirtle = new Image();
+    squirtle.classList.add('squirtle');
     squirtle.src = squirtleSprite;
 
     element.appendChild(chikorita);

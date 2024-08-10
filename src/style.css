@@ -41,6 +41,10 @@ h2 {
     padding: 5px 15px;
 }
 
+.person-submit:hover, .year-submit:hover, .clear-all:hover, .delete:hover {
+    cursor: pointer;
+}
+
 .submit-button, .delete-button {
     text-align: right;
     padding-right: 1rem;
@@ -54,4 +58,8 @@ h2 {
 .error-year-submit-error, .error-person-submit-error {
     color: red;
     font-size: 0.75rem;
+}
+
+.pokemon {
+    text-align: center;
 }
